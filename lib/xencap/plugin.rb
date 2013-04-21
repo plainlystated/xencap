@@ -24,7 +24,6 @@ module Xencap
 
     def teardown
       @session.logout
-      puts "session logged out"
     end
 
     def _ignore_ssl_errors
