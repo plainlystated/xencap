@@ -8,7 +8,7 @@ module Xencap
       _ignore_ssl_errors if options.fetch(:ignore_ssl_errors, false)
 
       begin
-        @session.login_with_password(options.fetch(:login), options.fetch(:password))
+       @session.login_with_password(options.fetch(:login), options.fetch(:password))
         vms = @session.VM.get_all
         vms.each do |vm|
           record = @session.VM.get_record(vm)
@@ -18,8 +18,13 @@ module Xencap
           end
         end
       ensure
-        @session.logout
+        teardown
       end
+    end
+
+    def teardown
+      @session.logout
+      puts "session logged out"
     end
 
     def _ignore_ssl_errors
