@@ -2,24 +2,21 @@ require 'xencap/xenapi'
 
 module Xencap
   module Plugin
+    attr_reader :session
+
     def setup(uri, options = {})
       @session = XenAPI::Session.new(uri)
 
       _ignore_ssl_errors if options.fetch(:ignore_ssl_errors, false)
 
-      begin
        @session.login_with_password(options.fetch(:login), options.fetch(:password))
-        vms = @session.VM.get_all
-        vms.each do |vm|
-          record = @session.VM.get_record(vm)
-          unless record['is_a_template'] || record['is_control_domain']
-            name = record['name_label']
-            puts "Found VM uuid #{record['uuid']} called #{name}"
-          end
-        end
-      ensure
-        teardown
-      end
+
+       metaclass = class << self; self; end
+       @session_proxies = ["VM"].each do |scope|
+         metaclass.send(:define_method, scope.downcase) do
+           Xencap::SessionProxy.new(@session, scope)
+         end
+       end
     end
 
     def teardown

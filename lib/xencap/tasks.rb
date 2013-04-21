@@ -4,7 +4,7 @@ Capistrano::Configuration.instance.load do
   set :xencap_password, nil
   set :xencap_ignore_ssl_errors, false
 
-  on_rollback do
+  on :exit do
     xencap.session.teardown
   end
 
