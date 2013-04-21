@@ -2,6 +2,7 @@ module Xencap
   require File.expand_path('../xencap/tasks', __FILE__)
 
   autoload :Plugin, File.expand_path('../xencap/plugin', __FILE__)
+  autoload :RequestDispatcher, File.expand_path('../xencap/request_dispatcher', __FILE__)
   autoload :SessionProxy, File.expand_path('../xencap/session_proxy', __FILE__)
 end
 

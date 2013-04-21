@@ -6,21 +6,18 @@ module Xencap
 
     def setup(uri, options = {})
       @session = XenAPI::Session.new(uri)
-
       _ignore_ssl_errors if options.fetch(:ignore_ssl_errors, false)
 
        @session.login_with_password(options.fetch(:login), options.fetch(:password))
-
-       metaclass = class << self; self; end
-       @session_proxies = ["VM"].each do |scope|
-         metaclass.send(:define_method, scope.downcase) do
-           Xencap::SessionProxy.new(@session, scope)
-         end
-       end
+       @request_dispatcher = Xencap::RequestDispatcher.new(@session)
     end
 
     def teardown
       @session.logout
+    end
+
+    def method_missing(method, *args)
+      @request_dispatcher.dispatch(method, *args)
     end
 
     def _ignore_ssl_errors
