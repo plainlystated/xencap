@@ -1,7 +1,9 @@
 Capistrano::Configuration.instance.load do
   set :xencap_server_uri, nil
   set :xencap_login, "root"
-  set :xencap_password, nil
+  set :xencap_password, do
+    Capistrano::CLI.password_prompt("xen password: ")
+  end
   set :xencap_ignore_ssl_errors, false
 
   on :exit do
