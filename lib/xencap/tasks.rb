@@ -25,5 +25,14 @@ Capistrano::Configuration.instance.load do
         xencap_plugin.teardown
       end
     end
+
+    namespace :vm do
+      task :list do
+        xencap.session.setup
+        xencap_plugin.vm.get_vms.each do |vm|
+          puts vm['name_label']
+        end
+      end
+    end
   end
 end
