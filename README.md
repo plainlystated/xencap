@@ -8,6 +8,9 @@ I use [XCP](http://www.xen.org/products/cloudxen.html), so that's what this code
 ## Terminology
 If you're not already familiar with xen terminology (VIF, PBD, SR, etc), you should familiarize yourself with it, as those terms are used in this library. There's a handy overview in the [XenServer docs](http://docs.vmd.citrix.com/XenServer/6.0.0/1.0/en_gb/sdk.html#object_model_overview), though the terms apply to xen in general (xen, XCP, XenServer).
 
+## Hiding Complexity
+Xen is a complex project, and a running xen system has lots of moving parts (see Terminology, above). It is not the intent of this project to abstract away that complexity, but rather to allow automated management of it (in a version-controllable way).
+
 ## Example Usage
 There are a couple example tasks defined (eg `xencap:vm:list`), but to do anything meaningful you'll want to write your own. The following task (`xencap:vm:create:ubuntu_12_04`) uses a template (ubuntu 12.04 LTS) to create a new domain. It creates a VDI (virtual disk), a VBD (virtual block device, on the VDI), a VIF (Virtual Interface, on the local network), and puts it all on a new VM. It then starts the VM.
 ```ruby
