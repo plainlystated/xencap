@@ -29,9 +29,7 @@ Capistrano::Configuration.instance.load do
     namespace :vm do
       task :list do
         xencap.session.setup
-        xencap_plugin.vm.get_vms.each do |vm|
-          puts vm['name_label']
-        end
+        xencap_plugin.vm.get_all_records.reject {|ref, record| record['is_a_template'] || record['is_control_domain'] }.values.each {|v| puts v['name_label'] }
       end
     end
   end

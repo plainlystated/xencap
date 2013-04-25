@@ -2,7 +2,7 @@ require 'xencap/xenapi'
 
 module Xencap
   module Plugin
-    attr_reader :session
+    attr_reader :session, :request_dispatcher
 
     def setup(uri, options = {})
       @session = XenAPI::Session.new(uri)
