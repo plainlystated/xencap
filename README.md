@@ -3,10 +3,10 @@
 A [capistrano](https://github.com/capistrano/capistrano) plugin for common xen tasks, using [xenapi](https://github.com/meineerde/xenapi.rb).
 
 ## XCP, XenServer
-I use [XCP](http://www.xen.org/products/cloudxen.html), so that's what this codebase has been developed against. It probably works with other xen management systems (XenServer, etc), but that hasn't been tested. If you find that it works (or doens't work) with something other than XCP, drop me a note or pull request to update the docs.
+I use [XCP](http://www.xen.org/products/cloudxen.html), so that's what this codebase has been developed against. It probably works with other xen management systems (XenServer, etc), but that hasn't been tested. If you find that it works (or doesn't work) with something other than XCP, drop me a note or pull request to update the docs.
 
-## SSL
-If your xen server uses a self-signed certificate for its HTTPS site (which is the default for XCP, at least), you'll get an SSL error along the lines of "certificate verify failed". Unfortunately, the xenapi library doesn't provide an easy way to specify the correct SSL certificate), so the only option for now is to use `:ignore_ssl_errors => true` when calling `xencap.setup`. This should only be done in a trusted environment. Someday I hope somebody writes a better xenapi library.
+## Terminology
+If you're not already familiar with xen terminology (VIF, PBD, SR, etc), you should familiarize yourself with it, as those terms are used in this library. There's a handy overview in the [XenServer docs](http://docs.vmd.citrix.com/XenServer/6.0.0/1.0/en_gb/sdk.html#object_model_overview), though the terms apply to xen in general (xen, XCP, XenServer).
 
 ## Example Usage
 There are a couple example tasks defined (eg `xencap:vm:list`), but to do anything meaningful you'll want to write your own. The following task (`xencap:vm:create:ubuntu_12_04`) uses a template (ubuntu 12.04 LTS) to create a new domain. It creates a VDI (virtual disk), a VBD (virtual block device, on the VDI), a VIF (Virtual Interface, on the local network), and puts it all on a new VM. It then starts the VM.
@@ -71,3 +71,6 @@ end
 
 ## Docs
 This plugin is a light-weight wrapper around xenapi, which unfortunately isn't well documented. I use [this PDF](http://support.citrix.com/servlet/KbServlet/download/25589-102-666255/xenenterpriseapi.pdf) as a reference.
+
+## SSL
+If your xen server uses a self-signed certificate for its HTTPS site (which is the default for XCP, at least), you'll get an SSL error along the lines of "certificate verify failed". Unfortunately, the xenapi library doesn't provide an easy way to specify the correct SSL certificate), so the only option for now is to use `:ignore_ssl_errors => true` when calling `xencap.setup`. This should only be done in a trusted environment. Someday I hope somebody writes a better xenapi library.
