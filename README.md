@@ -10,7 +10,7 @@ If your xen server uses a self-signed certificate for its HTTPS site (which is t
 
 ## Example Usage
 ```ruby
-$: << File.expand_path(File.dirname(__FILE__) + "/../lib/vycap/lib # until there's a proper gem
+$: << File.expand_path(File.dirname(__FILE__) + "/../lib/vycap/lib" # until there's a proper gem
 require 'vycap'
 
 set :xencap_server_uri, "http://192.168.1.123"
