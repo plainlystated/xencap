@@ -13,7 +13,7 @@ module Xencap
     end
 
     def teardown
-      @session.logout
+      @session.logout unless @session.nil?
     end
 
     def method_missing(method, *args)
