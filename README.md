@@ -2,8 +2,8 @@
 
 A [capistrano](https://github.com/capistrano/capistrano) plugin for common xen tasks, using [xenapi](https://github.com/meineerde/xenapi.rb).
 
-## XCP, XenServer
-I use [XCP](http://www.xen.org/products/cloudxen.html), so that's what this codebase has been developed against. It probably works with other xen management systems (XenServer, etc), but that hasn't been tested. If you find that it works (or doesn't work) with something other than XCP, drop me a note or pull request to update the docs.
+## XCP, XenServer, XAPI
+This library should work with any xen system running XAPI as the toolstack. This is the default on XenServer and [XCP](http://www.xen.org/products/cloudxen.html).
 
 ## Terminology
 If you're not already familiar with xen terminology (VIF, PBD, SR, etc), you should familiarize yourself with it, as those terms are used in this library. There's a handy overview in the [XenServer docs](http://docs.vmd.citrix.com/XenServer/6.0.0/1.0/en_gb/sdk.html#object_model_overview), though the terms apply to xen in general (xen, XCP, XenServer).
