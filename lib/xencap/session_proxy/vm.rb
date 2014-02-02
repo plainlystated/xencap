@@ -17,8 +17,8 @@ class Xencap::SessionProxy::Vm < Xencap::SessionProxy
   end
 
   def get_vms
-    get_all_records.reject do |vm|
-      vm['is_a_template'] || vm['is_control_domain']
+    get_all_records.reject do |vm, params|
+      params['is_a_template'] || params['is_control_domain']
     end
   end
 
