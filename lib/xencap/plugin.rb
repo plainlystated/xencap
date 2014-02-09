@@ -8,12 +8,17 @@ module Xencap
       @session = XenAPI::Session.new(uri)
       _ignore_ssl_errors if options.fetch(:ignore_ssl_errors, false)
 
-       @session.login_with_password(options.fetch(:login), options.fetch(:password))
-       @request_dispatcher = Xencap::RequestDispatcher.new(@session)
+      @session.login_with_password(options.fetch(:login), options.fetch(:password))
+      @session.timeout = 120
+      @request_dispatcher = Xencap::RequestDispatcher.new(@session)
     end
 
     def teardown
       @session.logout unless @session.nil?
+    end
+
+    def set_timeout(timeout)
+      @session.timeout = timeout
     end
 
     def method_missing(method, *args)
